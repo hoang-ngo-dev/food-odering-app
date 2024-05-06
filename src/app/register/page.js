@@ -1,12 +1,14 @@
 "use client"
 import React, { useState } from 'react'
 import Image from 'next/image'
+import { headers } from 'next/headers';
 
 const RegisterPage = () => {
   const[email,setEmail] = useState('');
   const[password, setPassword] = useState('');
   function handleFormSubmit(ev){
     ev.preventDefault();
+    fetch('/api/register', {method: "POST", body:JSON.stringify({email,password}),headers:{'Content-Type': 'application/json'}})
   }
   return (
     <section className='mt-8'>
