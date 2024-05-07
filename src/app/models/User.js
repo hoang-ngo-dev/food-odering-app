@@ -13,9 +13,9 @@ const UserSchema = new Schema({
 },{timestamps:true});
 
 UserSchema.post('validate',function (user){
-    const pass = user.password;
+    const notHashedPassword = user.password;
     const salt = bcrypt.genSaltSync(10);
-    const hashedPassword = bcrypt.hashSync("B4c0/\/",salt);
+    user.password = bcrypt.hashSync(notHashedPassword,salt);
     // user.password = 'hashed';
     // console.log({arguments});
 })
